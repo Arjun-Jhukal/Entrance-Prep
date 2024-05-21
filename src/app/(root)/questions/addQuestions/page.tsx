@@ -5,9 +5,46 @@ import { Input } from "@/components/ui/input";
 import { useAppDispatch } from "@/hooks/hooks";
 import { NotificationType, showNotification } from "@/slice/notification";
 import { IoMdAdd } from "react-icons/io";
+import * as Yup from "yup";
+import { useFormik } from "formik";
 
 export default function AddQuestion() {
   const dispatch = useAppDispatch();
+
+  const validationSchema = Yup.object({
+    question: Yup.string().required("Question is Required"),
+    option: Yup.array().of(Yup.string().required("Option is Required")).min(1, "At least one option is required"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      question: "",
+      option: ["", "", ""],
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      console.log("clicked");
+      try {
+        console.log(values);
+        dispatch(
+          showNotification({
+            message: "Question updated successfully",
+            variant: NotificationType.Success,
+            autoHide: true,
+          })
+        );
+      } catch (e) {
+        console.log(formik.errors.question);
+        dispatch(
+          showNotification({
+            message: "Failed to update question",
+            variant: NotificationType.Error,
+            autoHide: false,
+          })
+        );
+      }
+    },
+  });
 
   const handleSubmit = () => {
     try {
@@ -38,7 +75,13 @@ export default function AddQuestion() {
                 Question
               </label>
 
-              <Input className="w-full rounded-[5px] border-[1px] border-gray-300 border-solid " name="question" type="text" />
+              <Input
+                className="w-full rounded-[5px] border-[1px] border-gray-300 border-solid "
+                name="question"
+                type="text"
+                onChange={formik.handleChange}
+              />
+              {formik.touched.question && formik.errors.question ? <p>{formik.errors.question}</p> : ""}
             </div>
 
             <div className="mb-4">
@@ -79,9 +122,9 @@ export default function AddQuestion() {
               </label>
 
               <div className=" pt-4 ">
-                <Input className="w-full rounded-[5px] border-[1px] border-gray-300 border-solid mb-2" name="option" type="text" />
-                <Input className="w-full rounded-[5px] border-[1px] border-gray-300 border-solid mb-2" name="option" type="text" />
-                <Input className="w-full rounded-[5px] border-[1px] border-gray-300 border-solid mb-2" name="option" type="text" />
+                <Input className="w-full rounded-[5px] border-[1px] border-gray-300 border-solid mb-2" name="option[0]" type="text" />
+                <Input className="w-full rounded-[5px] border-[1px] border-gray-300 border-solid mb-2" name="option[1]" type="text" />
+                <Input className="w-full rounded-[5px] border-[1px] border-gray-300 border-solid mb-2" name="option[2]" type="text" />
                 <Tooltip message="New Option">
                   <Button className="w-full text-center  bg-purple-950 hover:bg-purple-700 text-white rounded-[5px]">
                     <IoMdAdd size={32} />
@@ -91,8 +134,15 @@ export default function AddQuestion() {
             </div>
 
             <div className="button__group flex justify-start gap-4">
-              <Button className="bg-red-600 text-white hover:bg-red-500">Cancel</Button>
-              <Button className="bg-green-600 text-white hover:bg-green-500" onClick={handleSubmit}>
+              <Button className="bg-red-600 text-white hover:bg-red-500" disabled={!formik.dirty}>
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                className="bg-green-600 text-white hover:bg-green-500"
+                onClick={() => formik.handleSubmit()}
+                disabled={!formik.dirty}
+              >
                 Save
               </Button>
             </div>
