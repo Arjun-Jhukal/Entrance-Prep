@@ -1,7 +1,7 @@
 export type Subject = "Physics" | "Chemistry" | "Biology" | "Mathematics" | "English";
 
 export interface QuestionProps {
-  subject: string;
+  subject?: string;
   question: string;
   haveMultipleAnswer: boolean;
   submittedAnswer?: string[];
