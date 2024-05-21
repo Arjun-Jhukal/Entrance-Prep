@@ -2,8 +2,8 @@ export type Subject = "Physics" | "Chemistry" | "Biology" | "Mathematics" | "Eng
 
 export interface QuestionProps {
   subject?: string;
-  question: string;
-  haveMultipleAnswer: boolean;
+  question?: string;
+  haveMultipleAnswer?: boolean;
   submittedAnswer?: string[];
   actualAnswer: string[];
   isMcq: boolean;
