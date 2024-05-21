@@ -18,7 +18,7 @@ export default function Table({ data, columns }: { data: QuestionProps[]; column
       <thead className="thead border-b-[1px] border-gray-200 ">
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
-            {headerGroup.headers.map((header) => (
+            {headerGroup.headers.map((header: any) => (
               <th key={header.id} onClick={header.column.getToggleSortingHandler()} className="text-start py-2">
                 {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext)}
               </th>
@@ -30,7 +30,7 @@ export default function Table({ data, columns }: { data: QuestionProps[]; column
       <tbody className="tbody">
         {table.getRowModel().rows.map((row) => (
           <tr key={row.id} className="border-b-[1px] border-gray-100">
-            {row.getVisibleCells().map((cell) => {
+            {row.getVisibleCells().map((cell: any) => {
               console.log(typeof cell.column.columnDef.cell);
               return (
                 <td key={cell.id} className="py-2">
