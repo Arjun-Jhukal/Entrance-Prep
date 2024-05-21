@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { IoIosClose } from "react-icons/io";
 import { IoLogoCss3 } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa";
 import { LiaAngleRightSolid, LiaAngleLeftSolid } from "react-icons/lia";
@@ -9,7 +10,7 @@ import { IoHomeOutline } from "react-icons/io5";
 import { IoSettingsOutline } from "react-icons/io5";
 import { PiUsersThreeThin } from "react-icons/pi";
 import { CiPaperplane } from "react-icons/ci";
-import React from "react";
+import React, { useContext } from "react";
 import { RxCopy } from "react-icons/rx";
 import MenuItem from "@/components/molecule/MenuItem";
 
@@ -43,12 +44,12 @@ export default function Header() {
       </div>
       <nav className="menu__items xl:pt-8">
         <ul className="flex flex-col items-start justify-start">
-          <MenuItem open={open} icon={<IoHomeOutline className="mr-2 icon-height-width" />} label="dashboard" isSingle />
+          <MenuItem open={open} icon={<IoHomeOutline className="mr-4 icon-height-width" />} label="dashboard" isSingle />
           <MenuItem
             open={open}
             currentMenu={user}
             setCurrentMenu={(active: boolean) => setUser(active)}
-            icon={<PiUsersThreeThin className="mr-2 icon-height-width" />}
+            icon={<PiUsersThreeThin className="mr-4 icon-height-width" />}
             label="Users"
             dropdownMenuItems={["All Users", "Students", "Teachers"]}
           />
@@ -56,7 +57,7 @@ export default function Header() {
             open={open}
             currentMenu={questions}
             setCurrentMenu={(active: boolean) => setQuestions(active)}
-            icon={<CiPaperplane className="mr-2 icon-height-width" />}
+            icon={<CiPaperplane className="mr-4 icon-height-width" />}
             label="Questions"
             dropdownMenuItems={["Solve", "Add Questions", "All Questions"]}
           />
@@ -64,11 +65,11 @@ export default function Header() {
             open={open}
             currentMenu={result}
             setCurrentMenu={(active: boolean) => setResult(active)}
-            icon={<RxCopy className="mr-2 icon-height-width" />}
+            icon={<RxCopy className="mr-4 icon-height-width" />}
             label="Result"
             dropdownMenuItems={["Solve", "Add Questions", "All Questions"]}
           />
-          <MenuItem open={open} icon={<IoSettingsOutline className="mr-2 icon-height-width" />} label="Setting" isSingle />
+          <MenuItem open={open} icon={<IoSettingsOutline className="mr-4 icon-height-width" />} label="Setting" isSingle />
         </ul>
       </nav>
     </header>

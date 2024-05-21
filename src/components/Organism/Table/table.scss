@@ -1,0 +1,15 @@
+.table {
+  tr {
+    th,
+    td {
+      &:nth-child(1) {
+        max-width: 300px;
+        min-width: 280px;
+      }
+      &:nth-child(3) {
+        max-width: 250px;
+        min-width: 200px;
+      }
+    }
+  }
+}
