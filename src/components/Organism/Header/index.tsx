@@ -67,7 +67,7 @@ export default function Header() {
             setCurrentMenu={(active: boolean) => setResult(active)}
             icon={<RxCopy className="mr-4 icon-height-width" />}
             label="Result"
-            dropdownMenuItems={["Solve", "Add Questions", "All Questions"]}
+            dropdownMenuItems={["My Result", "Add Result", "All "]}
           />
           <MenuItem open={open} icon={<IoSettingsOutline className="mr-4 icon-height-width" />} label="Setting" isSingle />
         </ul>
